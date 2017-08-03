@@ -1,0 +1,49 @@
+#keyborad{
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.keyboradTop{
+	font-family: sans-serif;
+}
+.main{
+	width: 850px;
+    margin: 40px auto;
+    font-family: Courier, sans-serif;
+    font-size:18px; 
+}
+body{
+	background-color: #16181C;
+    color:#DEE8F2
+}
+code{
+	font-size:14px; 
+}
+ 
+button{
+	padding:5px;
+}
+
+a:link {
+    color: #f22450;
+}
+a:visited {
+    
+}
+a:hover {
+    
+}
+a:active {
+    
+}
+
+h2{
+	color:#579EBF;
+	font-family: sans-serif;
+
+}
+h1{
+	font-family:  sans-serif;
+	color:#f22450;
+}
+
+
