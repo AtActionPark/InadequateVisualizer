@@ -19,11 +19,12 @@ Simple Oscilloscope, volume and frequency visualizers
 let context = new AudioContext
 //Params fall back on default values. 
 let audioVisualizerVolume = new AudioVisualizer({context:context,
-												divID:'volumeID',
-												type:'Volume', //type can be Volume/Frequency/Oscilloscope
-												width:400,
-												height:220,
-												fftSize:2048})
+	divID:'volumeID',
+	type:'Volume', //type can be Volume/Frequency/Oscilloscope
+	width:400,
+	height:220,
+	fftSize:2048})
+	
 //Connect it to the desired web audio node and start drawing
 audioVisualizerVolume.connectAndDraw(node)
 
