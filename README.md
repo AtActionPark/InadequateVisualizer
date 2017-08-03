@@ -35,4 +35,4 @@ And here you go.
 
 
 
-Visit the [webAudioVisualizer page](https://atactionpark.github.io/webAudioVisualizer/) for more info.
+Visit the [webAudioVisualizer page](https://atactionpark.github.io/WebAudioVisualizer/) for more info.
