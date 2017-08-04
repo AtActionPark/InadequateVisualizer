@@ -6,10 +6,10 @@
     <title>WebAudioVisualizer</title>
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/github.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
     <script  src="js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script  src="js/webAudioVisualizer.min.js"></script>
+    <script> hljs.initHighlightingOnLoad();</script>
+    <script  src="js/webAudioVisualizer.js"></script>
     <script  src="js/superKeyborad.min.js"></script>
     <script  src="js/script.js"></script>
     
@@ -17,15 +17,15 @@
 
   <body>
   <div class="main">
+
       <h1>WEBAUDIOVISUALIZER</h1>
 
-      <p>Easy to set up HTML web audio api visualizers. </p>
+      <p>Easy to set up web audio api visualizers. No dependencies</p>
 
       <h2>DOWNLOAD</h2>
 
       <p>Grab the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/WebAudioVisualizer.js">full script</a>, or the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/WebAudioVisualizer.min.js">minified version</a>.</p>
 
-      <p>For now, you'll also need jQuery, so yeah, there's that</p>
 
       <h2>SET UP</h2>
 
@@ -36,30 +36,28 @@
         <pre><code class="js">
       // In Script file
 
-      $(document).ready(function(){ 
-        let keyborad = new Keyborad()
-        let c = keyborad.context
-        let n = keyborad.mixNode
+      let keyborad = new Keyborad()
+      let c = keyborad.context
+      let n = keyborad.mixNode
 
-        //Create the visualizers, give them a context, container and type
-        //the full options list is shown, but params will fall back on default
-        // values if not provided
-        let audioVisualizerVolume = new AudioVisualizer({context:c,
-                        divID:'volumeID',
-                        type:'Volume', //type can be Volume/Frequency/Oscilloscope
-                        width:400,
-                        height:220,
-                        fftSize:2048})
-                        
-        //Connect to the desired node
-        audioVisualizerVolume.connectAndDraw(n)
+      //Create the visualizers, give them a context, container and type
+      //the full options list is shown, but params will fall back on default
+      // values if not provided
+      let audioVisualizerVolume = new AudioVisualizer({context:c,
+                      divID:'volumeID',
+                      type:'Volume', //type can be Volume/Frequency/Oscilloscope
+                      width:400,
+                      height:220,
+                      fftSize:2048})
+                      
+      //Connect to the desired node
+      audioVisualizerVolume.connectAndDraw(n)
 
-        let audioVisualizerFreq = new AudioVisualizer({context:c,divID:'freqID',type:'Frequency'})
-        audioVisualizerFreq.connectAndDraw(n)
+      let audioVisualizerFreq = new AudioVisualizer({context:c,divID:'freqID',type:'Frequency'})
+      audioVisualizerFreq.connectAndDraw(n)
 
-        let audioVisualizerScope= new AudioVisualizer({context:c,divID:'scopeID',type:'Oscilloscope'})
-        audioVisualizerScope.connectAndDraw(n)
-      })
+      let audioVisualizerScope= new AudioVisualizer({context:c,divID:'scopeID',type:'Oscilloscope'})
+      audioVisualizerScope.connectAndDraw(n)
 
       // In HTML file
 

@@ -67,41 +67,81 @@
 		//2 pixels wide each or the buffer length
 		this.maxNbOfBars = Math.min(this.width/2,this.bufferLength)
 
+		let div = document.getElementById(this.divID);
 		//If no container has been created beforehand, create a default one
-		if(this.divID == 'defaultAudioVisualizerID')
-			$('body').append('<div id="defaultAudioVisualizerID"></div>')
+		if(div == null){
+			let defaultID = document.createElement("div")
+			defaultID.id = 'defaultAudioVisualizerID'
+			document.body.appendChild(defaultID)
+			div = document.getElementById(defaultID.id);
+		}
 
 		//Create a style all parts of the audiovisualizer
 		//Main container
-		let div = $('#' + this.divID)
-		div.height(this.HEIGHT)
-		div.width(this.WIDTH)
-		div.css('display','inline-block')
-		div.css('border','1px solid black')
-		div.css('backgroundColor',this.panelColor)
-		div.css('position','relative')
-		div.addClass('webAudioVisualizer')
+		
+	
+
+
+
+		div.style.height = this.HEIGHT + "px";
+		div.style.width = this.WIDTH + "px";
+		div.style.display = 'inline-block';
+		div.style.border = '1px solid black';
+		div.style.backgroundColor = this.panelColor;
+		div.style.position = 'relative'
+		div.classList.add('webAudioVisualizer')
 
 		//Top Border & title
-		div.append('<div style="position:absolute;width:'+this.width+'px;text-align:center;margin:auto;color:'+this.panelTextColor+';"><b>'+ this.type+'</b></div>')
-		//Bottom border
-		if(this.type=='Frequency')
-			div.append('<div style="position:absolute;bottom:0px;width:'+this.width+'px;color:'+this.panelTextColor+';">'+this.freqAxisLegend+'</div>')
-		else
-			div.append('<div style="position:absolute;bottom:0px;width:'+this.width+'px;color:'+this.panelTextColor+';"></div>')
+		let topBorder = document.createElement("div")
+		topBorder.style.position = 'absolute';
+		topBorder.style.width = this.width + 'px'
+		topBorder.style.textAlign = 'center'
+		topBorder.style.margin = 'auto'
+		topBorder.style.color = this.panelTextColor
+
+		let title = document.createElement("b")
+		title.innerHTML = this.type
+		topBorder.appendChild(title)
+
 		//Left border
-		div.append('<div style="position:absolute;top:0px;width:'+this.leftSize+'px;height:'+this.HEIGHT+'px;color:'+this.panelTextColor+';"></div>')
+		let leftBorder = document.createElement("div")
+		leftBorder.style.position = 'absolute';
+		leftBorder.style.top = '0px';
+		leftBorder.style.width = this.leftSize + 'px'
+		leftBorder.style.height = this.HEIGHT + 'px'
+		leftBorder.style.color = this.panelTextColor
+
+		//Boittom border
+		let bottomBorder = document.createElement("div")
+		bottomBorder.style.position = 'absolute';
+		bottomBorder.style.bottom = '0px';
+		bottomBorder.style.width = this.width + 'px'
+		bottomBorder.style.color = this.panelTextColor
+		bottomBorder.innerHTML = this.type == 'Frequency'?this.freqAxisLegend:''
+
+		div.appendChild(topBorder)
+		div.appendChild(leftBorder)
+		div.appendChild(bottomBorder)
 
 		let canvas = document.createElement('canvas');
 		this.canvasCtx = canvas.getContext("2d");
 		canvas.width = this.width;
     	canvas.height = this.height;
     	canvas.style.cssText = ('position:absolute;top:'+this.topSize+'px;left:'+this.leftSize+'px;')
-		div.append(canvas)
+		div.appendChild(canvas)
 		
 		//Right side control panel
-		let panel = '<div id = "' + this.divID + 'Panel" class="panel" style=" display:inline-block;position:absolute;right:0px; width:' + this.panelSize + 'px; height:' + this.HEIGHT + 'px;"></div>'
-		div.append(panel)
+		let panel = document.createElement("div")
+		panel.id = this.divID + 'Panel';
+		panel.classList.add('panel')
+		panel.style.display = 'inline-block'
+		panel.style.position = 'absolute';
+		panel.style.right = '0px';
+		panel.style.width = this.panelSize + 'px';
+		panel.style.height = this.HEIGHT + 'px';
+
+		div.appendChild(panel)
+
 		//Add all needed controls depending on type
 		this.addControls(panel)
 	}
@@ -129,50 +169,88 @@
 	//Add custom controls depending on type
 	AudioVisualizer.prototype.addControls = function(panel){
 		let self = this
-		let d = $('#' + this.divID + 'Panel')
+		//let d = $('#' + this.divID + 'Panel')
+		let d = document.getElementById(this.divID+'Panel')
 		let offset = this.HEIGHT/10
 		let pos = (this.HEIGHT-offset)/3
+
+		
 		
 		//Add freeze button for any type of visualizer
-		d.append('<button id="' + this.type + 'Freeze" style="position:absolute;left:10px;top:'+(offset/2+3*pos-20)+'px;">Freeze</button>')
-		$('#'+this.type+'Freeze').click(function(){
-	        self.freeze = !self.freeze
+		let freezeButton = document.createElement("button")
+		freezeButton.id = this.type + 'Freeze'
+		freezeButton.innerHTML = 'Freeze'
+		freezeButton.style.position = 'absolute';	
+		freezeButton.style.left = '10px';	
+		freezeButton.style.top = (offset/2+3*pos-20)+'px';	
+		
+		//d.append('<button id="' + this.type + 'Freeze" style="position:absolute;left:10px;top:'+(offset/2+3*pos-20)+'px;">Freeze</button>')
+		freezeButton.onclick = function(){
+			self.freeze = !self.freeze
 	        self.draw()
-		});
+		}
+		d.appendChild(freezeButton)
+		//$('#'+this.type+'Freeze').click(function(){
+	    //    self.freeze = !self.freeze
+	    //    self.draw()
+		//});
 
 		if(this.type == 'Volume'){
-			d.append(this.addControl('yScale','yScaleVolume',offset/2,1,10))
-			d.append(this.addControl('Memory','xScaleVolume',offset/2+pos,3,this.params.maxXScaleVolume))
+			d.appendChild(this.addControl('yScale','yScaleVolume',offset/2,1,10))
+			d.appendChild(this.addControl('Memory','xScaleVolume',offset/2+pos,3,this.params.maxXScaleVolume))
 		}
 		if(this.type == 'Frequency'){ 
-			d.append(this.addControl('Resolution','nbOfBarsFrequencies',offset/2,4,this.maxNbOfBars))
-			d.append(this.addControl('Zoom','xScaleFrequencies',offset/2+pos,1,10))
+			d.appendChild(this.addControl('Resolution','nbOfBarsFrequencies',offset/2,4,this.maxNbOfBars))
+			d.appendChild(this.addControl('Zoom','xScaleFrequencies',offset/2+pos,1,10))
 		}
 		if(this.type == 'Oscilloscope'){
-			d.append(this.addControl('yScale','yScaleOscilloscope',offset/2,1,200))
-			d.append(this.addControl('Zoom','xScaleOscilloscope',offset/2+pos,1,100))
+			d.appendChild(this.addControl('yScale','yScaleOscilloscope',offset/2,1,200))
+			d.appendChild(this.addControl('Zoom','xScaleOscilloscope',offset/2+pos,1,100))
 		}
+
+
 	}
 	//Add one control (slider)
 	AudioVisualizer.prototype.addControl = function(name,control,pos,min,max){
 		let self = this;
-		let resultDiv = $('<div style="position:absolute; top:'+ pos+'px;"></div>')
+		let resultDiv = document.createElement("div");
+		resultDiv.style.position = 'absolute';
+		resultDiv.style.top = pos+'px';
 
-		resultDiv.append('<p style="position:absolute;left:5px;margin:0px;padding:0px;color:'+this.panelTextColor+'">'+name+'</p>')
 
-		let value = self.params[control]
-		let sliderStyle = 'style="position:absolute; left:5px;top:15px;width:'+ (this.panelSize-10) + 'px"'
-		let slider = $('<input id="' + name + 'Slider" class="slider" ' + sliderStyle + 'type="range" min="'+min+'" max="'+max+'" step="1" value="'+value+'"/>')
+		let controlName = document.createElement("p");
+		controlName.innerHTML = name;
+		controlName.style.position = 'absolute';
+		controlName.style.left = '5px';
+		controlName.style.margin = 0;
+		controlName.style.padding = 0;
+		controlName.style.color = this.panelTextColor;
+
+		resultDiv.appendChild(controlName)
 		
+		let slider = document.createElement('input')
+		slider.id = name+'Slider';
+		slider.classList.add('slider');
+		slider.style.position ='absolute';
+		slider.style.left ='5px';
+		slider.style.top ='15px';
+		slider.style.width =(this.panelSize-10) + 'px';
+		slider.type = 'range'
+		slider.min = min;
+		slider.max = max;
+		slider.step = 1;
+		slider.value= self.params[control];
+
 		//On change, overwrite the slider params
-		slider.change(function(){
-			self.params[control] = parseFloat($(this).val())
+		slider.onchange = function(){
+			self.params[control] = this.value
 			//Volume specific, we keep track of an array of values. When changing the scale we need to redimension the array
 			if(control == 'xScaleVolume'){
 				self.volumeArray = self.volumeArray.slice(0,self.params[control])
 			}
-		})
-		resultDiv.append(slider)
+		}
+		resultDiv.appendChild(slider)
+
 		return resultDiv
 	}
 	AudioVisualizer.prototype.drawVolume = function(){

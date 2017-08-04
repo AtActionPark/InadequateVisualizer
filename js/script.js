@@ -1,7 +1,10 @@
 "use strict";
 
-$(document).ready(function(){
-	let keyborad = new Keyborad()
+document.addEventListener('DOMContentLoaded', function(){ 
+    hljs.initHighlightingOnLoad()
+
+    //Set up the keyboard. settings are optional and will fall back on default values if needed
+    let keyborad = new Keyborad()
 	let c = keyborad.context
 	let n = keyborad.mixNode
 
@@ -18,16 +21,9 @@ $(document).ready(function(){
 
 	let audioVisualizerScope= new AudioVisualizer({context:c,divID:'scopeID',type:'Oscilloscope'})
 	audioVisualizerScope.connectAndDraw(n)
-})
 
 
-
-
-
-
-
-
-
+}, false);
 
 
 
