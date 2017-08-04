@@ -8,8 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/github.css">
 
     <script  src="js/highlight.pack.js"></script>
-    <script> hljs.initHighlightingOnLoad();</script>
-    <script  src="js/webAudioVisualizer.js"></script>
+    <script  src="js/webAudioVisualizer.min.js"></script>
     <script  src="js/superKeyborad.min.js"></script>
     <script  src="js/script.js"></script>
     
@@ -36,7 +35,7 @@
         <pre><code class="js">
       // In Script file
 
-      let keyborad = new Keyborad()
+      let keyborad = new Keyborad({showKey:true})
       let c = keyborad.context
       let n = keyborad.mixNode
 

@@ -2,9 +2,8 @@
 
 Simple Oscilloscope, volume and frequency visualizers
 
-#### Add the script to your project. Also needs jQuery, 
+#### Add the script to your project. 
 ```html
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="scripts/webAudioVisualizer.min.js"></script>
 ```
 #### Add containers in your HTML
@@ -17,7 +16,7 @@ Simple Oscilloscope, volume and frequency visualizers
 #### Create a visualizer object
 ```javascript
 let context = new AudioContext
-//Params fall back on default values. 
+
 let audioVisualizerVolume = new AudioVisualizer({context:context,
 	divID:'volumeID',
 	type:'Volume', //type can be Volume/Frequency/Oscilloscope
