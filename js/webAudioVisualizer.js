@@ -1,6 +1,5 @@
 (function(){
-
-	AudioVisualizer = function(params){
+	InadequateVisualizer = function(params){
 		//create a context if none is passed
 		if(params.context)
 			this.context = params.context 
@@ -8,7 +7,7 @@
 			this.context = new AudioContext
 
 		//user params with defautl values
-		this.divID = params.divID || 'defaultAudioVisualizerID';
+		this.divID = params.divID || 'defaultInadequateVisualizerID';
 		this.type = params.type || 'Oscilloscope';
 		this.WIDTH = params.width || 400;
 		this.HEIGHT = params.height ||220;
@@ -49,14 +48,14 @@
 		
 		this.init()
 	}
-	AudioVisualizer.prototype.connectAndDraw = function(source,destination){
+	InadequateVisualizer.prototype.connectAndDraw = function(source,destination){
 		source.connect(this.analyser)
 		//Can be connected between sources or to a single source
 		if(destination)
 			this.analyser.connect(destination)
 		this.draw()
 	}
-	AudioVisualizer.prototype.init = function(){
+	InadequateVisualizer.prototype.init = function(){
 		//Create and set up analyser
 		this.analyser = this.context.createAnalyser();
 		this.analyser.fftSize = this.fftSize;
@@ -71,25 +70,20 @@
 		//If no container has been created beforehand, create a default one
 		if(div == null){
 			let defaultID = document.createElement("div")
-			defaultID.id = 'defaultAudioVisualizerID'
+			defaultID.id = 'defaultInadequateVisualizerID'
 			document.body.appendChild(defaultID)
 			div = document.getElementById(defaultID.id);
 		}
 
-		//Create a style all parts of the audiovisualizer
+		//Create a style all parts of the InadequateVisualizer
 		//Main container
-		
-	
-
-
-
 		div.style.height = this.HEIGHT + "px";
 		div.style.width = this.WIDTH + "px";
 		div.style.display = 'inline-block';
 		div.style.border = '1px solid black';
 		div.style.backgroundColor = this.panelColor;
 		div.style.position = 'relative'
-		div.classList.add('webAudioVisualizer')
+		div.classList.add('inadequateVisualizer')
 
 		//Top Border & title
 		let topBorder = document.createElement("div")
@@ -145,11 +139,11 @@
 		//Add all needed controls depending on type
 		this.addControls(panel)
 	}
-	AudioVisualizer.prototype.draw = function(){
+	InadequateVisualizer.prototype.draw = function(){
 		if(this.freeze)
 			return
 		
-		let drawVisual = requestAnimationFrame(AudioVisualizer.prototype.draw.bind(this));
+		let drawVisual = requestAnimationFrame(InadequateVisualizer.prototype.draw.bind(this));
 
 		this.dataArray = new Uint8Array(this.bufferLength);
 
@@ -167,15 +161,14 @@
 	    	this.drawOscilloscope()
 	}
 	//Add custom controls depending on type
-	AudioVisualizer.prototype.addControls = function(panel){
+	InadequateVisualizer.prototype.addControls = function(panel){
 		let self = this
 		//let d = $('#' + this.divID + 'Panel')
 		let d = document.getElementById(this.divID+'Panel')
 		let offset = this.HEIGHT/10
 		let pos = (this.HEIGHT-offset)/3
 
-		
-		
+	
 		//Add freeze button for any type of visualizer
 		let freezeButton = document.createElement("button")
 		freezeButton.id = this.type + 'Freeze'
@@ -207,11 +200,9 @@
 			d.appendChild(this.addControl('yScale','yScaleOscilloscope',offset/2,1,200))
 			d.appendChild(this.addControl('Zoom','xScaleOscilloscope',offset/2+pos,1,100))
 		}
-
-
 	}
 	//Add one control (slider)
-	AudioVisualizer.prototype.addControl = function(name,control,pos,min,max){
+	InadequateVisualizer.prototype.addControl = function(name,control,pos,min,max){
 		let self = this;
 		let resultDiv = document.createElement("div");
 		resultDiv.style.position = 'absolute';
@@ -253,7 +244,7 @@
 
 		return resultDiv
 	}
-	AudioVisualizer.prototype.drawVolume = function(){
+	InadequateVisualizer.prototype.drawVolume = function(){
 		this.analyser.getByteFrequencyData(this.dataArray);
 
 	    let v = this.getAverageVolume(this.dataArray)
@@ -281,7 +272,7 @@
     	}
   		this.canvasCtx.stroke();
 	}
-	AudioVisualizer.prototype.drawFrequencies = function(){
+	InadequateVisualizer.prototype.drawFrequencies = function(){
 		this.analyser.getByteFrequencyData(this.dataArray);
 
 		let nbOfBar = this.params.nbOfBarsFrequencies
@@ -329,7 +320,7 @@
 	    for(let i = 1000;i<this.context.sampleRate/2;i+=1000)
 			this.canvasCtx.fillText('|',(barWidth+1)*this.getIndexFromFrequencies(i,dataPerBar)- barWidth/2,this.height);
 	}
-	AudioVisualizer.prototype.drawOscilloscope = function(){
+	InadequateVisualizer.prototype.drawOscilloscope = function(){
 		this.analyser.getByteTimeDomainData(this.dataArray); 
 
 		//getByteTimeDomainData maps to 0 -> 256,  128 being the value for 0
@@ -365,7 +356,7 @@
 	    this.canvasCtx.stroke();
 	}
 	//Helpers
-	AudioVisualizer.prototype.getAverageVolume = function(array) {
+	InadequateVisualizer.prototype.getAverageVolume = function(array) {
 	    let values = 0;
 	    let average;
 	    let length = array.length;
@@ -379,7 +370,7 @@
 	    return average;
 	}
 	//Find the bar index where a speciic frequency will fit
-	AudioVisualizer.prototype.getIndexFromFrequencies = function(freq,dataPerBar){
+	InadequateVisualizer.prototype.getIndexFromFrequencies = function(freq,dataPerBar){
 		let freqIncrement =  this.context.sampleRate/this.fftSize
 		freqIncrement*=dataPerBar
 

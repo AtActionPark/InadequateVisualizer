@@ -17,18 +17,18 @@
   <body>
   <div class="main">
 
-      <h1>WEBAUDIOVISUALIZER</h1>
+      <h1>INADEQUATE VISUALIZER!</h1>
 
       <p>Easy to set up web audio api visualizers. No dependencies</p>
 
       <h2>DOWNLOAD</h2>
 
-      <p>Grab the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/WebAudioVisualizer.js">full script</a>, or the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/WebAudioVisualizer.min.js">minified version</a>.</p>
+      <p>Grab the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/InadequateVisualizer.js">full script</a>, or the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/InadequateVisualizer.min.js">minified version</a>.</p>
 
 
       <h2>SET UP</h2>
 
-      <p>Add the webAudioVisualizer.js file to your project, create a webAudioVisualizer object and a div to hold it, and connect it to your node.</p>
+      <p>Add the inadequateVisualizer.js file to your project, create a inadequateVisualizer object and a div to hold it, and connect it to your node.</p>
 
       <p>We'll use a <a href="https://github.com/AtActionPark/SuperKeyborad" >superKeyborad</a> to generate the sound</p>
       
@@ -42,7 +42,7 @@
       //Create the visualizers, give them a context, container and type
       //the full options list is shown, but params will fall back on default
       // values if not provided
-      let audioVisualizerVolume = new AudioVisualizer({context:c,
+      let visualizerVolume = new InadequateVisualizer({context:c,
                       divID:'volumeID',
                       type:'Volume', //type can be Volume/Frequency/Oscilloscope
                       width:400,
@@ -50,13 +50,13 @@
                       fftSize:2048})
                       
       //Connect to the desired node
-      audioVisualizerVolume.connectAndDraw(n)
+      visualizerVolume.connectAndDraw(n)
 
-      let audioVisualizerFreq = new AudioVisualizer({context:c,divID:'freqID',type:'Frequency'})
-      audioVisualizerFreq.connectAndDraw(n)
+      let visualizerFreq = new InadequateVisualizer({context:c,divID:'freqID',type:'Frequency'})
+      visualizerFreq.connectAndDraw(n)
 
-      let audioVisualizerScope= new AudioVisualizer({context:c,divID:'scopeID',type:'Oscilloscope'})
-      audioVisualizerScope.connectAndDraw(n)
+      let visualizerScope= new InadequateVisualizer({context:c,divID:'scopeID',type:'Oscilloscope'})
+      visualizerScope.connectAndDraw(n)
 
       // In HTML file
 
