@@ -4,7 +4,7 @@ Simple Oscilloscope, volume and frequency visualizers
 
 #### Add the script to your project. 
 ```html
-<script src="scripts/webAudioVisualizer.min.js"></script>
+<script src="scripts/inadequateVisualizer.min.js"></script>
 ```
 #### Add containers in your HTML
 ```html
@@ -16,8 +16,7 @@ Simple Oscilloscope, volume and frequency visualizers
 #### Create a visualizer object
 ```javascript
 let context = new AudioContext
-
-let audioVisualizerVolume = new AudioVisualizer({context:context,
+visualizerVolume = new InadequateVisualizer({context:context,
 	divID:'volumeID',
 	type:'Volume', //type can be Volume/Frequency/Oscilloscope
 	width:400,
@@ -25,7 +24,7 @@ let audioVisualizerVolume = new AudioVisualizer({context:context,
 	fftSize:2048})
 	
 //Connect it to the desired web audio node and start drawing
-audioVisualizerVolume.connectAndDraw(node)
+visualizerVolume.connectAndDraw(node)
 
 ```
 
@@ -34,4 +33,4 @@ And here you go.
 
 
 
-Visit the [webAudioVisualizer page](https://atactionpark.github.io/WebAudioVisualizer/) for more info.
+Visit the [webAudioVisualizer page](https://atactionpark.github.io/InadequateVisualizer/) for more info.
