@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function(){
     hljs.initHighlightingOnLoad()
 
     //Set up the keyboard. settings are optional and will fall back on default values if needed
-    let keyborad = new Keyborad({showKey:true})
-	let c = keyborad.context
-	let n = keyborad.mixNode
+    let keyboard = new TolerableKeyboard({showKey:true})
+	let c = keyboard.context
+	let n = keyboard.mixNode
 
 	let visualizerVolume = new InadequateVisualizer({context:c,
 												divID:'volumeID',
