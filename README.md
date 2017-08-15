@@ -33,4 +33,4 @@ And here you go.
 
 
 
-Visit the [webAudioVisualizer page](https://atactionpark.github.io/InadequateVisualizer/) for more info.
+Visit the [TolerableVisualizer page](https://atactionpark.github.io/InadequateVisualizer/) for more info.
