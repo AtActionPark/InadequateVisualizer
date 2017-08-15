@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" name="apple-mobile-web-app-capable" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebAudioVisualizer</title>
+    <title>InadequateVisualizer</title>
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/github.css">
 
@@ -23,21 +23,21 @@
 
       <h2>DOWNLOAD</h2>
 
-      <p>Grab the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/InadequateVisualizer.js">full script</a>, or the <a href="https://github.com/AtActionPark/SuperKeyborad/blob/master/js/InadequateVisualizer.min.js">minified version</a>.</p>
+      <p>Grab the <a href="https://github.com/AtActionPark/InadequateVisualizer/blob/master/js/inadequateVisualizer.js">full script</a>, or the <a href="https://github.com/AtActionPark/InadequateVisualizer/blob/master/js/inadequateVisualizer.min.js">minified version</a>.</p>
 
 
       <h2>SET UP</h2>
 
-      <p>Add the inadequateVisualizer.js file to your project, create a inadequateVisualizer object and a div to hold it, and connect it to your node.</p>
+      <p>Add the inadequateVisualizer.min.js file to your project, create a inadequateVisualizer object and a div to hold it, and connect it to your node.</p>
 
       <p>We'll use a <a href="https://github.com/AtActionPark/SuperKeyborad" >superKeyborad</a> to generate the sound</p>
       
         <pre><code class="js">
       // In Script file
 
-      let keyborad = new Keyborad({showKey:true})
-      let c = keyborad.context
-      let n = keyborad.mixNode
+      let keyboard = new TolerableKeyboard({showKey:true})
+      let c = keyboard.context
+      let n = keyboard.mixNode
 
       //Create the visualizers, give them a context, container and type
       //the full options list is shown, but params will fall back on default
@@ -60,7 +60,7 @@
 
       // In HTML file
 
-      &lt;div id="keyborad">&lt;/div>;
+      &lt;div id="keyboard">&lt;/div>;
 
       &lt;div id="volumeID">&lt;/div>
       &lt;div id="freqID">&lt;/div>
@@ -69,7 +69,7 @@
 
         <p>And that's it</p>
         
-      <div id="keyborad"></div>
+      <div id="keyboaad"></div>
 
       <div id="volumeID"></div>
       <div id="freqID"></div>

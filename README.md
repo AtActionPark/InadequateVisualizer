@@ -1,4 +1,4 @@
-# WebAudioVisualizer
+# InadequateVisualizer
 
 Simple Oscilloscope, volume and frequency visualizers
 
